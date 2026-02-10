@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hemanth Varma Buddharaju | Full Stack Developer</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0f172a;       /* Deep Slate */
+            --card: #1e293b;     /* Lighter Slate */
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --accent: #06b6d4;   /* Cyan */
+            --accent-hover: #22d3ee;
+            --border: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Global Layout --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        .logo span { color: var(--accent); }
+
+        .nav-links a {
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding-top: 10rem;
+            padding-bottom: 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(to right, var(--accent), #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-sub);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        /* Hero Buttons */
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #0f172a;
+        }
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+        .btn-outline:hover {
+            background: rgba(6, 182, 212, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* --- Section Headers --- */
+        .section-header {
+            margin-bottom: 2.5rem;
+        }
+        .section-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-header h2::before {
+            content: "#";
+            color: var(--accent);
+        }
+
+        /* --- Experience --- */
+        .exp-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .exp-time {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            font-family: monospace;
+            padding-top: 5px;
+        }
+
+        .exp-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .exp-content h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .exp-content ul {
+            list-style: none;
+        }
+        .exp-content li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-sub);
+            font-size: 0.95rem;
+        }
+        .exp-content li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* --- Skills Segregation --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            transition: 0.2s;
+        }
+        .skill-tag:hover {
+            border-color: var(--accent);
+            color: var(--text-main);
+        }
+
+        /* --- Projects --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        
+        .project-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+        .project-card p {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+            margin-bottom: 1.25rem;
+        }
+        .project-tech {
+            font-size: 0.8rem;
+            font-family: monospace;
+            color: var(--accent);
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* --- Contact Section --- */
+        .contact-section {
+            text-align: center;
+            border: none;
+            padding: 6rem 0;
+        }
+        
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem; 
+            margin-top: 3rem;
+            margin-bottom: 3rem; /* Added margin to separate from copy box */
+        }
+
+        .contact-icon-link {
+            font-size: 2.5rem;
+            color: var(--text-sub);
+            transition: all 0.3s ease;
+            position: relative;
+            text-decoration: none;
+            width: 50px; 
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-icon-link span {
+            position: absolute;
+            top: 120%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            white-space: nowrap;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--text-main);
+            pointer-events: none;
+        }
+
+        .contact-icon-link:hover {
+            color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon-link:hover span {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* --- Copy Data Container (New Feature) --- */
+        .copy-container {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: left; /* Reset text align for this box */
+        }
+
+        .copy-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .copy-row:last-child {
+            border-bottom: none;
+        }
+
+        .copy-label {
+            font-weight: 600;
+            color: var(--text-sub);
+            width: 80px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-value {
+            color: var(--text-main);
+            flex-grow: 1;
+            padding-left: 1rem;
+            font-family: monospace;
+            font-size: 0.95rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--accent);
+            color: #0f172a; /* Dark text for contrast */
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.5s, bottom 0.5s;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-sub);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* --- Mobile --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+            .exp-time { margin-bottom: 0.5rem; }
+            .nav-links { display: none; }
+            .skills-grid { grid-template-columns: 1fr; }
+            
+            .contact-icons { flex-direction: column; gap: 3rem; }
+            .contact-icon-link { width: auto; }
+            .contact-icon-link span { position: static; opacity: 1; margin-top: 0.5rem; transform: none; }
+
+            /* Copy container adjustments for mobile */
+            .copy-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .copy-value { padding-left: 0; margin-bottom: 0.5rem; }
+            .copy-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">Hemanth Varma Buddharaju<span>.</span></a>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Work</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="hero" id="about">
+            <div data-aos="fade-up" data-aos-duration="800">
+                <p style="color: var(--accent); margin-bottom: 1rem; font-family: monospace;">Hi, my name is</p>
+                <h1>Hemanth Varma Buddharaju.<br><span>I build distributed systems.</span></h1>
+                <p>
+                    I am a Full Stack Developer with 4+ years of experience engineering scalable microservices and high-performance APIs. Currently optimizing workflows at Akrivia HCM.
+                </p>
+                
+                <div class="hero-btns">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="HemanthVarmaBuddharaju.pdf" target="_blank" class="btn btn-outline">
+                        Resume <i class="fas fa-download" style="margin-left: 8px;"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="section-header" data-aos="fade-right">
+                <h2>Experience</h2>
+            </div>
+
+            <div class="exp-item" data-aos="fade-up">
+                <div class="exp-time">July 2022 - Present</div>
+                <div class="exp-content">
+                    <h3>Software Development Engineer</h3>
+                    <h4>Akrivia HCM</h4>
+                    <ul>
+                        <li>Engineered and maintained Recruitment, Onboarding, and Helpdesk modules.</li>
+                        <li>Reduced API response times by 30% through advanced database indexing and query optimization.</li>
+                        <li>Implemented Event-Driven Architecture using Kafka for real-time data processing.</li>
+                        <li>Designed an automated emailing system reducing HR workload by 40%.</li>
+                        <li>Integrated HackerRank, Aon, and background verification tools (Ongrid, IDfy).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exp-item" data-aos="fade-up">
+                <div class="exp-time">Sep 2021 - June 2022</div>
+                <div class="exp-content">
+                    <h3>Software Development Engineer Intern</h3>
+                    <h4>Akrivia HCM</h4>
+                    <ul>
+                        <li>Developed production-ready REST APIs for over 30 frontend pages.</li>
+                        <li>Led end-to-end development for multiple features, including DB migrations.</li>
+                        <li>Collaborated with UX designers and product managers to refine requirements.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="section-header" data-aos="fade-right">
+                <h2>Technical Arsenal</h2>
+            </div>
+            <div class="skills-grid" data-aos="fade-up">
+                
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C / C++</span>
+                        <span class="skill-tag">HTML / CSS</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Frameworks</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Angular</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">NestJS</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Database & Cloud</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">AWS S3</span>
+                        <span class="skill-tag">DigitalOcean</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & DevOps</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Kafka</span>
+                        <span class="skill-tag">Git / GitLab</span>
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Postman</span>
+                        <span class="skill-tag">Bitbucket</span>
+                        <span class="skill-tag">Sentry</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">Cursor</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="section-header" data-aos="fade-right">
+                <h2>Projects</h2>
+            </div>
+            <div class="projects-grid">
+                
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-top">
+                        <i class="far fa-folder"></i>
+                    </div>
+                    <h3>BlinkChat</h3>
+                    <p>A random video chat application using WebRTC and Socket.IO for real-time, low-latency communication between strangers.</p>
+                    <div class="project-tech">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>WebRTC</span>
+                        <span>Socket.IO</span>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-top">
+                        <i class="far fa-folder"></i>
+                    </div>
+                    <h3>Beat Box</h3>
+                    <p>A desktop music player application built with Python. Features include playlist creation and full media playback controls.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Tkinter</span>
+                        <span>Desktop</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div data-aos="zoom-in">
+                <p style="color: var(--accent); margin-bottom: 1rem;">What's Next?</p>
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-main);">Get In Touch</h2>
+                <p style="max-width: 500px; margin: 0 auto; color: var(--text-sub);">
+                    I'm currently looking for new opportunities. Feel free to reach out via phone, LinkedIn, or email.
+                </p>
+                
+                <div class="contact-icons">
+                    <a href="tel:+919703777552" class="contact-icon-link">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 9703777552</span>
+                    </a>
+                    
+                    <a href="https://linkedin.com/in/hemanth-varma-buddharaju" target="_blank" class="contact-icon-link">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    
+                    <a href="mailto:hemu63181indu@gmail.com" class="contact-icon-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                    </a>
+                </div>
+
+                <div class="copy-container">
+                    
+                    <div class="copy-row">
+                        <span class="copy-label">Phone</span>
+                        <span class="copy-value">+91 9703777552</span>
+                        <button class="copy-btn" onclick="copyToClipboard('+919703777552')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+
+                    <div class="copy-row">
+                        <span class="copy-label">Email</span>
+                        <span class="copy-value">hemu63181indu@gmail.com</span>
+                        <button class="copy-btn" onclick="copyToClipboard('hemu63181indu@gmail.com')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+
+                    <div class="copy-row">
+                        <span class="copy-label">LinkedIn</span>
+                        <span class="copy-value">linkedin.com/in/hemanth-varma-buddharaju</span>
+                        <button class="copy-btn" onclick="copyToClipboard('https://linkedin.com/in/hemanth-varma-buddharaju')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <div id="toast">Data Copied to Clipboard</div>
+
+    <footer>
+        <p>Built by Hemanth Varma Buddharaju</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+        });
+
+        // Copy Function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                var x = document.getElementById("toast");
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

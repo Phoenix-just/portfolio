@@ -304,6 +304,7 @@
             align-items: center;
             gap: 4rem; 
             margin-top: 3rem;
+            margin-bottom: 3rem; /* Added margin to separate from copy box */
         }
 
         .contact-icon-link {
@@ -343,6 +344,97 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* --- Copy Data Container (New Feature) --- */
+        .copy-container {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: left; /* Reset text align for this box */
+        }
+
+        .copy-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .copy-row:last-child {
+            border-bottom: none;
+        }
+
+        .copy-label {
+            font-weight: 600;
+            color: var(--text-sub);
+            width: 80px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-value {
+            color: var(--text-main);
+            flex-grow: 1;
+            padding-left: 1rem;
+            font-family: monospace;
+            font-size: 0.95rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--accent);
+            color: #0f172a; /* Dark text for contrast */
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.5s, bottom 0.5s;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+
         /* --- Footer --- */
         footer {
             text-align: center;
@@ -359,9 +451,15 @@
             .exp-time { margin-bottom: 0.5rem; }
             .nav-links { display: none; }
             .skills-grid { grid-template-columns: 1fr; }
+            
             .contact-icons { flex-direction: column; gap: 3rem; }
             .contact-icon-link { width: auto; }
             .contact-icon-link span { position: static; opacity: 1; margin-top: 0.5rem; transform: none; }
+
+            /* Copy container adjustments for mobile */
+            .copy-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .copy-value { padding-left: 0; margin-bottom: 0.5rem; }
+            .copy-btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -481,6 +579,9 @@
                         <span class="skill-tag">Jira</span>
                         <span class="skill-tag">Postman</span>
                         <span class="skill-tag">Bitbucket</span>
+                        <span class="skill-tag">Sentry</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">Cursor</span>
                     </div>
                 </div>
 
@@ -544,14 +645,44 @@
                     
                     <a href="mailto:hemu63181indu@gmail.com" class="contact-icon-link">
                         <i class="fas fa-envelope"></i>
-                        <span>hemu63181indu@gmail.com</span>
+                        <span>Email</span>
                     </a>
+                </div>
+
+                <div class="copy-container">
+                    
+                    <div class="copy-row">
+                        <span class="copy-label">Phone</span>
+                        <span class="copy-value">+91 9703777552</span>
+                        <button class="copy-btn" onclick="copyToClipboard('+919703777552')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+
+                    <div class="copy-row">
+                        <span class="copy-label">Email</span>
+                        <span class="copy-value">hemu63181indu@gmail.com</span>
+                        <button class="copy-btn" onclick="copyToClipboard('hemu63181indu@gmail.com')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+
+                    <div class="copy-row">
+                        <span class="copy-label">LinkedIn</span>
+                        <span class="copy-value">linkedin.com/in/hemanth-varma-buddharaju</span>
+                        <button class="copy-btn" onclick="copyToClipboard('https://linkedin.com/in/hemanth-varma-buddharaju')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+
                 </div>
 
             </div>
         </section>
 
     </main>
+
+    <div id="toast">Data Copied to Clipboard</div>
 
     <footer>
         <p>Built by Hemanth Varma Buddharaju</p>
@@ -564,6 +695,17 @@
             offset: 50,
             duration: 800,
         });
+
+        // Copy Function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                var x = document.getElementById("toast");
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
     </script>
 </body>
 </html>
